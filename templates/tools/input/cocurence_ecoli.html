@@ -1,0 +1,98 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | Protein co-occurrence viewer {% endblock %}
+
+{% block content %}
+
+<main role="main">
+        <div class="container">
+          <h1 class="text-center pt-3">Protein co-occurrence viever <i>Escherichia coli</i></h1>
+          <br/>
+          <br/>
+
+	  <p>
+		For this approach we took <i>Escherichia coli str. K-12</i> proteins from Uniprot database
+		(data source : <a href='https://www.uniprot.org/uniprot/?query=proteome:UP000000625'> Uniprot </a>)
+		To search the co-occurrence database use gene names from Uniprot site above, e.g. abrB
+		<br>
+		We provide 3 ways of collapsing:
+		<br>
+		&raquo; Collapsed on species level - Here we analyse gene co-occurrence across all species. All strains that
+			belong to the same species are considered as one entity in the analysis.
+
+		<br>
+		&raquo; Collapsed on <i>Escherichia</i> strains - Here we analyse gene co-occurrence only across strains that belong to genus <i>Legionella</i>
+		<br>
+		&raquo; Collapsed on species within <i>Escherichia</i> - Here, we analyse gene co-occurrence across all species
+			that belong to genus <i>Escherichia</i> all strains that belong to the same species are considered as one entity in the analysis.
+
+
+	  </p>
+	  <p>
+		Significance of protein co-occurrence is assessed by Fisher's exact test. Co-occurrence is detected by performing
+		a BLAST search against <a href='https://www.ncbi.nlm.nih.gov/'>NCBI</a> database. Hits with E-value below 1e-5 are considered occurrences of homologs
+
+	  </p>
+
+          <br/>
+          <br/>
+          <div class="container">
+
+            </div>
+            <br/>
+            <br/>
+
+            <div class="container">
+                <div class="container">
+
+
+                    <form class="form-inline" action="{% url 'escherichia_result' %}">
+
+                        <label class="sr-only" for="inlineFormInputName1">Name</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="gene 1" name="gene1" value="{{ values.gene1 }}" >
+
+                        <label class="sr-only" for="inlineFormInputName2">Name</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="gene 2" name="gene2" value="{{ values.gene2 }}" >
+
+ <!---                       <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Threshold</label>
+                            <select class="custom-select mb-2 mr-sm-2" id="inlineFormInputName3">
+                                <option selected='true' disabled="disabled" >Organism (all)</option>
+                                <option value="escherichia">Escherichia</option> --->
+
+                            </select>
+                            <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Threshold</label>
+
+                            <select name="pvalue"  class="custom-select mb-2 mr-sm-2" id="inlineFormInputName3">
+                                <option selected='true' disabled="disabled">Pvalue (none)</option>
+                                  {% for key, value in cutoff_choices.items %}
+                                    <option value="{{ key }}"
+                                    {% if key == values.cutoff %}
+                                        selected
+                                    {% endif %}
+                                    >{{value}}</option>
+                                  {% endfor %}
+                            </select>
+                            <select name="colapsing"  class="custom-select mb-2 mr-sm-2" id="inlineFormInputName3">
+
+                                  {% for key, value in colapsing_choices.items %}
+                                    <option value="{{ key }}"
+                                    {% if key == values.colapsing %}
+                                        selected
+                                    {% endif %}
+                                    >{{value}}</option>
+                                  {% endfor %}
+                            </select>
+                        <button type="submit" class="btn btn-primary mb-2 mr-sm-2 ">Search</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+</main>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+{% endblock %}

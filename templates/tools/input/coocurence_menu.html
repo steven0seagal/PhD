@@ -1,0 +1,41 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | Protein Co-occurrence Menu {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="text-center pt-3">Protein Co-occurrence</h1>
+              <br/>
+              <br/>
+
+        <p>
+            Many genes in microbial genes remain functionally uncharacterised. Understanding signalling and metabolic
+            pathways involving such genes is essential for deeper understanding of microbial biology, and also
+            mechanisms of infectious diseases. It is well-known that genes which co-occur across genomes
+            are more likely to share similar biological functions than random pairs of genes.
+        </p>
+        <p>
+            Here we propose a novel algorithm for assessing co-occurrence. We considered a serious limitation of existing approaches
+            which is over-representation of some "popular" species like <i>Escherichia coli</i>.
+            Our algorithm allows collapsing the co-occurrence relationships at different taxonomic levels.
+            Below we provide protein co-occurrence analysis from two organism <i>Escherichia coli</i> and
+            <i>Legionella pneumophila</i>.
+              </p>
+              </br>
+              </br>
+
+    <a href="{% url 'legionella' %}" class="btn btn-success btn-lg btn-block">Legionella pneumophila</a>
+    <br>
+    <br>
+    <a href="{% url 'escherichia' %}" class="btn btn-success btn-lg btn-block">Escherichia coli</a>
+    <br>
+    <br>
+    <a href="{% url 'homosapiens' %}" class="btn btn-success btn-lg btn-block">Homo sapiens</a>
+
+</div>
+
+</br>
+</br>
+{% endblock %}

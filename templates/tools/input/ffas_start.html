@@ -1,0 +1,103 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | FFAS  {% endblock %}
+
+{% block content %}
+
+
+<main role="main">
+    <div class="container">
+      <h1 class="text-center pt-3">FFAS</h1>
+      <br/>
+      <br/>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+      <br/>
+      <br/>
+
+<!--      FILE-->
+        <form action = "{% url 'ffas_analysis' %}" method="post" enctype= 'multipart/form-data'>
+          <p><b> Protein sequence</b></p>
+          {% csrf_token %}
+          <input type="file" name="input" required=''>
+          <br/>
+          <br/>
+
+
+<!--      # CHECK BOXES-->
+          <br/>
+          <p><b>Select which database you want to search</b></p>
+<!--          ## PDB -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="PDB_box" id="exampleRadios1" value="PDB_box" >
+            <label class="form-check-label" for="exampleRadios1">
+              PDB database
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="SCOP_box" id="exampleRadios2" value="SCOP_box">
+            <label class="form-check-label" for="exampleRadios2">
+              SCOP database
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="checkbox" name="PFAM_box" id="exampleRadios3" value="PFAM_box">
+            <label class="form-check-label" for="exampleRadios3">
+              Pfam database
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="checkbox" name="Hsapiens_box" id="exampleRadios4" value="Hsapiens_box">
+            <label class="form-check-label" for="exampleRadios4">
+              H.sapiens
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="checkbox" name="COG_box" id="exampleRadios5" value="COG_box">
+            <label class="form-check-label" for="exampleRadios5">
+              COG database
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="checkbox" name="VFDB_box" id="exampleRadios5" value="VFDB_box">
+            <label class="form-check-label" for="exampleRadios5">
+              VFDB database
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="checkbox" name="VFdbcustom_box" id="exampleRadios5" value="VFdbcustom_box">
+            <label class="form-check-label" for="exampleRadios5">
+              VFDB_custom database
+            </label>
+          </div>
+          <br/>
+          <br/>
+          
+           <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" name = "out_name" placeholder="Set name to your analysis"  required="">
+              </div>
+          </div>
+
+          <br/>
+          <br/>
+
+          {% if user.is_authenticated %}
+            <input type="submit" name="analyze" value="UPLOAD and SEARCH ! "  class="btn btn-primary btn-sm " >
+          {% else %}
+            <a href="{% url 'login' %}" class="btn-group">
+              <button type="button" class="btn btn-primary my-2 ">Login first !</button>
+            </a>
+          {% endif %}
+
+
+      </form>
+
+
+
+
+    </div>
+
+
+</main>
+
+{% endblock %}

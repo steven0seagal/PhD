@@ -1,0 +1,23 @@
+checkpoint 1
+checkpoint #2
+You have looked for conserved neighbourhood for pfam01469 domain, in range 5000 bp, in all_db database.
+DLOK TIME START 2019-12-25 11:47:28.703962
+DLOK TIME OVER 2019-12-25 12:16:10.597213
+concatenate_domain
+1225
+MATRIX CREATING 2019-12-25 12:16:16.258917
+MATRIX OVER 2019-12-25 15:46:21.294048
+Wilcoxon start 2019-12-25 15:46:21.294093
+Wilcoxon OVER 2019-12-25 15:51:53.673021
+Collecting data START 2019-12-25 15:51:53.673098
+Collecting data OVER 2019-12-25 15:51:55.539846
+Customizing_data START 2019-12-25 15:51:55.539874
+Customizing_data OVER 2019-12-25 15:51:55.739267
+checkpoint 1
+checkpoint #2
+You have looked for conserved neighbourhood for pfam00571 domain, in range 5000 bp, in all_db database.
+DLOK TIME START 2019-12-25 19:28:48.715983
+DLOK TIME OVER 2019-12-25 20:09:03.009476
+concatenate_domain
+7829
+MATRIX CREATING 2019-12-25 20:12:39.140830

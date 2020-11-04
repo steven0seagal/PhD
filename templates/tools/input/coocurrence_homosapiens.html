@@ -1,0 +1,95 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | Protein co-occurrence viewer {% endblock %}
+
+{% block content %}
+
+
+<main role="main">
+
+    <div class="container">
+    <form action = "{% url 'homosapiens_calculate' %}" >
+    <h1 class="text-center pt-3">Protein co-occurrence viever <i>Homo sapiens</i></h1>
+      <br/>
+      <br/>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+      <br/>
+      <br/>
+      <p> Full list of proteins with aa sequences can by found here <a href="https://www.uniprot.org/uniprot/?query=proteome:UP000005640%20reviewed:yes">UNIPROT</a>
+          Or download from our server
+          <a href="/media/table_for_analysis.xlsx" class="btn btn-primary btn-sm" download>
+              Protein table</a>
+
+       </p>
+
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Wait a minute !</h4>
+            <p>
+                This tool is our newest invention so feel feel free to use it and test in many different ways. Before
+                using it please read carefully instructions above. Due to limit in server space result file will be
+                removed automatically after 72 h
+
+            </p>
+            <hr>
+            <p class="mb-0">If you have any suggestions or ideas that will help us improve our tool, feel free to mail us ;)</p>
+        </div>
+
+
+<!--      # CHECK BOXES-->
+          <br/>
+          <p><b>Select what analysis you want to do</b></p>
+<!--          ## PDB -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="fisher" id="exampleRadios1" value="fisher" >
+            <label class="form-check-label" for="exampleRadios1">
+              Fisher test
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="scalar" id="exampleRadios2" value="scalar">
+            <label class="form-check-label" for="exampleRadios2">
+              Scalar value
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="checkbox" name="mutual" id="exampleRadios3" value="mutual">
+            <label class="form-check-label" for="exampleRadios3">
+              Mutual information
+            </label>
+
+          </div>
+          <br/>
+          <br/>
+            <p><b>Write protein ID you want to analyse</b></p>
+           <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" name = "protein_id" placeholder="Protein ID"  required="">
+              </div>
+          </div>
+            <p><b>Name your analysis</b></p>
+         <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" name = "out_name" placeholder="Set name to your analysis"  required="">
+              </div>
+          </div>
+
+          {% if user.is_authenticated %}
+            <input type="submit" name="analyze" value="ANALYSE !!"  class="btn btn-primary btn-sm" >
+          {% else %}
+            <a href="{% url 'login' %}" class="btn-group">
+              <button type="button" class="btn btn-primary my-2 ">Login first !</button>
+            </a>
+          {% endif %}
+
+
+      </form>
+
+
+
+
+    </div>
+
+
+</main>
+
+{% endblock %}
