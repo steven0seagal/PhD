@@ -22,7 +22,11 @@
                         <div class="card-body">
                           <!-- Alerts -->
                             {% include 'partials/_alerts.html' %}
-                            <form action="{% url 'register' %}" method="POST">
+
+
+
+
+                          <form action="{% url 'account_signup' %}" method="POST">
                                     {% csrf_token %}
                               <div class="form-group">
                               <label for="first_name">First Name</label>
@@ -43,11 +47,11 @@
                             <div class="form-group">
                               <label for="password2">Password</label>
                               <input type="password" name="password" class="form-control" required>
-                                
+
                             </div>
                             <div class="form-group">
                               <label for="password">Confirm Password</label>
-                                
+
                               <input type="password" name="password2" class="form-control" required>
                             </div>
                             <input type="submit" value="Register" class="btn btn-secondary btn-block">

@@ -28,4 +28,5 @@ urlpatterns = [
     path('hmmer_fixer/', include('hmmer_fixer.urls')),
     path('admin/', admin.site.urls),
     path('ffas/',include('ffas.urls')),
+    path('accounts2/', include('allauth.urls')),
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

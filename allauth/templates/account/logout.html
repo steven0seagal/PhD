@@ -1,0 +1,58 @@
+{% extends 'base_wt.html' %}
+
+{% load i18n %}
+
+{% block title %} | Logout {% endblock %}
+
+{% block content %}
+
+<main role="main">
+        <div class="container">
+            <h1 class="text-center pt-5">Logout</h1>
+        </div>
+        <section id="login" class="bg-light py-5">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 mx-auto">
+                      <div class="card">
+                        <div class="card-header bg-primary text-white">
+                          <h4>
+                            <i class="fas fa-sign-in-alt"></i> Are you sure?</h4>
+                        </div>
+                      <div class="card-body">
+
+
+                            <form method="post" action="{% url 'account_logout' %}">
+                                {% csrf_token %}
+
+                                <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
+                                <button role="button" class="btn btn-success" href="{% url 'mainsite' %}">Stay on site</button>
+                            </form>
+
+
+
+
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+
+
+</main>
+
+
+
+
+<!--<form method="post" action="{% url 'account_logout' %}">-->
+<!--  {% csrf_token %}-->
+<!--  {% if redirect_field_value %}-->
+<!--  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>-->
+<!--  {% endif %}-->
+<!--  <button type="submit">{% trans 'Sign Out' %}</button>-->
+<!--</form>-->
+
+
+<!--{% endblock %}-->

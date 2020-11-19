@@ -26,7 +26,7 @@ SECRET_KEY = '15fywu9-7ij-s11a5^mr83-=yfef^=2-!p3qon5963k*9e2o&z'
 DEBUG = False
 
 ALLOWED_HOSTS = []
-
+SITE_ID = 1
 
 # Application definition
 
@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'searchdb_coocurence.apps.SearchdbCoocurenceConfig',
     'hmmer_fixer.apps.HmmerFixerConfig',
     'ffas.apps.FfasConfig',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,6 +84,19 @@ TEMPLATES = [
         },
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = [
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+]
+
+
 
 WSGI_APPLICATION = 'final_site.wsgi.application'
 
@@ -148,6 +167,22 @@ from django.contrib.messages import constants as messages
 MESSAGES_TAGS = {
     messages.ERROR: 'danger' ,
 }
+
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
+ACCOUNT_EMAIL_REQUIRED =True
+ACCOUNT_EMAIL_VERIFICATION ="mandatory"
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'l1nux0d3bug@gmail.com'
+EMAIL_HOST_PASSWORD = 'K1@5ter0debug'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+
+LOGIN_REDIRECT_URL = 'http://localhost:8000/'
+
+
 
 try:
     from .local_settings import *
