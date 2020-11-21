@@ -1,0 +1,83 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | Dashboard {% endblock %}
+
+{% block content %}
+<meta http-equiv="refresh" content="60"/>
+<main role="main">
+    <div class="container">
+      <h1 class="text-center pt-5">Results</h1>
+    </div>
+<br/>
+<br/>
+<br/>
+
+    <section id="dashboard" class="py-4">
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              <br/>
+        {% if checked_data_colapser %}
+          <h3>Colapser tool:</h3>
+          <br/>
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col">Analysis name</th>
+                    <th scope="col">Insert file</th>
+                    <th scope="col">Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for colapser_job in checked_data_colapser %}
+                    <tr>
+                      <td>{{colapser_job.id}}</td>
+                      <td>{{colapser_job.anal_name}}</td>
+                      <td>
+                           <a href="{{colapser_job.insert_file}}" class="btn btn-primary btn-sm" download>
+                              Input
+                          </a>
+                      </td>
+
+
+                      {% if colapser_job.link != None %}
+                        <td>
+                             <a href="{{colapser_job.link}}" class="btn btn-primary btn-sm" download>
+                                Download File
+                            </a>
+                        </td>
+                      {% else %}
+                        <td>Calculating...</td>
+                      {% endif %}
+                    </tr>
+                  {% endfor %}
+                </tbody>
+          </table>
+        {% else %}
+          <h3>Colapser tool:</h3>
+          <p> You have not started any jobs yet </p>
+        {% endif %}
+        <br/>
+        <br/>
+
+
+            <br/>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <h4 class="text-center pt-5">Current server time  {{current_time}}</h4>
+
+
+{% endblock %}

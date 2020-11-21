@@ -13,6 +13,7 @@ from .models import QueForPCH
 from scripts.data_from_script import feedMe
 from scripts.check_link_existance import new_file_checker
 import os
+import datetime
 
 def register(request):
     if request.method == "POST":
@@ -75,8 +76,90 @@ def logout(request):
 
         return redirect('login')
 
+def dashboard_neigh(request):
+
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    all_jobs = CompleteQueue.objects.order_by('-id').filter(user_id=request.user.id)
+    neigh_domain_jobs = feedMe(all_jobs, 'NA')
+    neigh_gene_jobs = feedMe(all_jobs, 'NAG')
+    neigh_domain_family_jobs = feedMe(all_jobs, "NAF")
+    neigh_domain_jobs_all = feedMe(all_jobs, "NAD")
+    neigh_jobs = neigh_domain_jobs + neigh_gene_jobs + neigh_domain_family_jobs + neigh_domain_jobs_all
+    neigh_jobs_sorted = sorted(neigh_jobs, key=lambda k: k['id'], reverse=True)
+
+    context = {
+        'current_time': current_time,
+        'neigh_example_jobs': neigh_jobs_sorted,
+    }
+    return render(request, 'user_panel/dashboard_neigh.html',context)
+
+def dashboard_ffas(request):
+
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    ffas_database_jobs = QueForFfas.objects.order_by('-id').filter(user_id=request.user.id)
+    ffas_jobs = feedMe(ffas_database_jobs, 'FFAS')
+
+    context = {
+        'current_time': current_time,
+        'ffas_jobs': ffas_jobs,
+    }
+    return render(request, 'user_panel/dashboard_ffas.html', context)
+
+def dashboard_stretch(request):
+    
+    all_jobs = CompleteQueue.objects.order_by('-id').filter(user_id = request.user.id)
+
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    stretch_example_jobs = feedMe(all_jobs,'M3A')
+
+    context = {
+	    'current_time' : current_time,
+        'stretch_example_jobs' :stretch_example_jobs,
+
+    }
+    return render(request, 'user_panel/dashboard_stretch.html', context)
+
+def dashboard_collaps(request):
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+    colapser_jobs = ColapserDatabase.objects.order_by('-id').filter(user_id = request.user.id)
+    checked_data_colapser = check_link_existance.link_ready(colapser_jobs)
+
+    context = {
+	    'current_time' : current_time,
+        'checked_data_colapser' : checked_data_colapser,
+    }
+
+    return render(request, 'user_panel/dashboard_colaps.html', context)
+
+def dashboard_hmmer(request):
+
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+    hmmer_jobs = HmmerFixerDatabase.objects.order_by('-id').filter(user_id = request.user.id)
+    checked_hmmer_jobs = check_link_existance.link_ready(hmmer_jobs)
+
+    context = {
+        'current_time': current_time,
+        'checked_hmmer_jobs': checked_hmmer_jobs,
+    }
+    return render(request, 'user_panel/dashboard_hmmer.html', context)
+
+def dashboard_pch(request):
+
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    pch_database_jobs = QueForPCH.objects.order_by('-id').filter(user_id = request.user.id)
+    pch_jobs = feedMe(pch_database_jobs,'PCH')
+
+    context = {
+	    'current_time' : current_time,
+        'pch_jobs':pch_jobs,
+    }
+
+    return render(request, 'user_panel/dashboard_pch.html', context)
+
 def dashboard(request):
-    current_time =  str(datetime.now())
+    current_time = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 
     colapser_jobs = ColapserDatabase.objects.order_by('-id').filter(user_id = request.user.id)

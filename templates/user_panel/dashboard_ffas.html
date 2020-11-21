@@ -1,0 +1,180 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | Dashboard {% endblock %}
+
+{% block content %}
+<meta http-equiv="refresh" content="60"/>
+<main role="main">
+    <div class="container">
+      <h1 class="text-center pt-5">Results</h1>
+    </div>
+<br/>
+<br/>
+<br/>
+
+    <section id="dashboard" class="py-4">
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              <br/>
+            {% if ffas_jobs %}
+                <h3>FFAS jobs</h3>
+                <br/>
+                <table class="table table-bordered">
+                  <thread>
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Analysis name</th>
+                          <th scope="col">Input</th>
+                          <th scope="col">Profile</th>
+                          <th scope="col">PDB</th>
+                          <th scope="col">SCOP</th>
+                          <th scope="col">PFAM</th>
+                          <th scope="col">H.sapiens</th>
+                          <th scope="col">COG</th>
+                          <th scope="col">VFDB</th>
+                          <th scope="col">VFDB_custom</th>
+                          <th scope="col">Status</th>
+                      </tr>
+                  </thread>
+                  <tbody>
+                  {% for ffas in ffas_jobs %}
+                    {% if ffas.status == 'Done' %}
+                        <tr>
+                            <td>{{ffas.id}}</td>
+                            <td>{{ffas.out_name}}</td>
+                            <td>
+                                 <a href="{{ffas.insert_file}}" class="btn btn-success btn-sm" download>
+                                    INPUT
+                                </a>
+                            </td>
+                            <td>
+                                 <a href="{{ffas.profile_id}}" class="btn btn-secondary btn-sm" download>
+                                    PROFILE
+                                </a>
+                            </td>
+
+                            {% if ffas.PDB != '-' %}
+                            <td>
+                                 <a href="{ffas.PDB}}" class="btn btn-warning btn-sm" download>
+                                    PDB
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+                            {% if ffas.SCOP != '-' %}
+                            <td>
+                                 <a href="{{ffas.SCOP}}" class="btn btn-warning btn-sm" download>
+                                    SCOP
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+                            {% if ffas.PFAM != '-' %}
+                            <td>
+                                 <a href="{{ffas.PFAM}}" class="btn btn-warning btn-sm" download>
+                                    PFAM
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+                            {% if ffas.Hsapiens != '-' %}
+                            <td>
+                                 <a href="{{ffas.Hsapiens}}" class="btn btn-warning btn-sm" download>
+                                    H.sapiens
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+                            {% if ffas.COG != '-' %}
+                            <td>
+                                 <a href="{{ffas.COG}}" class="btn btn-warning btn-sm" download>
+                                    COG
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+                            {% if ffas.VFDB != '-' %}
+                            <td>
+                                 <a href="{{ffas.VFDB}}" class="btn btn-warning btn-sm" download>
+                                    VFDB
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+                            {% if ffas.VFDB_custom != '-' %}
+                            <td>
+                                 <a href="{{ffas.VFDB_custom}}" class="btn btn-warning btn-sm" download>
+                                    VFDB_custom
+                                </a>
+                            </td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
+
+
+                            <td>{{ffas.status}}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ffas.id}}</td>
+                            <td>{{ffas.out_name}}</td>
+                            <td>
+                                 <a href="{{ffas.insert_file}}" class="btn btn-success btn-sm" download>
+                                    INPUT
+                                </a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ffas.status}}</td>
+                        </tr>
+                    {% endif %}
+                  {% endfor %}
+                  </tbody>
+                </table>
+
+
+
+            {% else %}
+                <h3>FFAS jobs</h3>
+                <p> You have not started any jobs yet </p>
+            {% endif %}
+
+
+            <br/>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <h4 class="text-center pt-5">Current server time  {{current_time}}</h4>
+
+
+{% endblock %}

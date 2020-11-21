@@ -1,0 +1,98 @@
+{% extends 'base_wt.html' %}
+
+{% block title %} | Dashboard {% endblock %}
+
+{% block content %}
+<meta http-equiv="refresh" content="60"/>
+<main role="main">
+    <div class="container">
+      <h1 class="text-center pt-5">Results</h1>
+    </div>
+<br/>
+<br/>
+<br/>
+
+    <section id="dashboard" class="py-4">
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+              <br/>
+            {% if stretch_example_jobs %}
+          <h3>Strecher tool:</h3>
+          <br/>
+          <table class="table table-bordered">
+            <thead>
+                <tr>
+                  <th scope="col"> # </th>
+                  <th scope="col">Master-Mater</th>
+                  <th scope="col">Master-Slave-1</th>
+                  <th scope="col">Master-Slave-2</th>
+                  <th scope="col">Analysis name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for stretcher_job in stretch_example_jobs %}
+                  <tr>
+                    <td>{{stretcher_job.id}}</td>
+ 		            <td>
+                        <a href="{{stretcher_job.master_master}}" class="btn btn-primary btn-sm" download>
+                            Master
+                        </a>
+                    </td>
+ 		            <td>
+                        <a href="{{stretcher_job.master_slave_1}}" class="btn btn-primary btn-sm" download>
+                            Slave 1
+                        </a>
+                    </td>
+ 		            <td>
+                        <a href="{{stretcher_job.master_slave_2}}" class="btn btn-primary btn-sm" download>
+                            Slave 2
+                        </a>
+                    </td>
+
+
+                    <td>{{stretcher_job.anal_name}}</td>
+                    <td>{{stretcher_job.status}}</td>
+                    {% if stretcher_job.status == 'Done' %}
+                        <td>
+                             <a href="{{stretcher_job.link}}" class="btn btn-primary btn-sm" download>
+                                Download File
+                            </a>
+                        </td>
+                      {% elif stretcher_job.status == 'Queue' %}
+                        <td> Please be patient ;)</td>
+                      {% elif stretcher_job.status == 'Error' %}
+                        <td> Please contact us  </td>
+                      {% elif stretcher_job.status == 'Running' %}
+                        <td> We analyse your request </td>
+                      {% endif %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+        {% else %}
+          <h3>Strecher tool:</h3>
+          <p> You have not started any jobs yet </p>
+        {% endif %}
+
+            <br/>
+          </div>
+        </div>
+      </div>
+    </section>
+</main>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <h4 class="text-center pt-5">Current server time  {{current_time}}</h4>
+
+
+{% endblock %}
