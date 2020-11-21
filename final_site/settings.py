@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'jquery',
     'rest_framework',
+    'maintenance_mode',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'maintenance_mode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'final_site.urls'
@@ -168,6 +170,8 @@ MESSAGES_TAGS = {
     messages.ERROR: 'danger' ,
 }
 
+# ALLAUTH SETTINGS
+
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 ACCOUNT_EMAIL_REQUIRED =True
 ACCOUNT_EMAIL_VERIFICATION ="mandatory"
@@ -182,7 +186,9 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 
 LOGIN_REDIRECT_URL = 'http://localhost:8000/'
 
-
+# MAINTANANCE MODE SETTINGS
+# MAINTENANCE_MODE = True
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
 
 try:
     from .local_settings import *
